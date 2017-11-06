@@ -602,9 +602,9 @@ PlayerSettings:
   cloudServicesEnabled: {}
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudProjectId: 6e6bec10-c027-4cb4-824e-8c5d91e3bcfe
+  projectName: Orbital
+  organizationId: msc-game-dev-2017
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

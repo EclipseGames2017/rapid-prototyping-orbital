@@ -252,8 +252,9 @@
 "../../../Orbital/Content/Blueprints/BP_FireZone.uasset" 251
 "../../../Orbital/Content/Blueprints/BP_Nucleus.uasset" 252
 "../../../Orbital/Content/Blueprints/BP_Particle.uasset" 253
-"../../../Orbital/Content/Blueprints/BP_GameManager.uasset" 254
-"../../../Orbital/Content/Sprites/FireMarkerSprite.uasset" 255
-"../../../Orbital/Content/Blueprints/BP_FireMarker.uasset" 256
-"../../../Orbital/Content/MainGame.umap" 257
-"../../../Engine/Content/Maps/Entry.umap" 258
+"../../../Orbital/Content/Blueprints/GameStatesEnum.uasset" 254
+"../../../Orbital/Content/Blueprints/BP_GameManager.uasset" 255
+"../../../Orbital/Content/Sprites/FireMarkerSprite.uasset" 256
+"../../../Orbital/Content/Blueprints/BP_FireMarker.uasset" 257
+"../../../Orbital/Content/MainGame.umap" 258
+"../../../Engine/Content/Maps/Entry.umap" 259

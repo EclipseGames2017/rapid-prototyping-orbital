@@ -48,7 +48,7 @@ namespace EclipseStudios.Orbital
                     float magnitude = Mathf.Clamp(direction.magnitude, minMagnitude, maxMagnitude);
 
                     if (direction.magnitude >= minMagnitude)
-                        GameManager.FireParticles(direction.normalized, magnitude * forceMultiplier);
+                        StartCoroutine(GameManager.FireParticles(direction.normalized, magnitude * forceMultiplier));
                 }
             }
             else

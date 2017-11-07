@@ -13,7 +13,9 @@ namespace EclipseStudios.Orbital
 
         public Particle particlePrefab;
         public static Pool<Particle> particles;
-        public static int maxParticles = 1;
+        public static int maxParticles = 3;
+
+        public float delayBetweenParticles = .2f;
 
         public Nucleus nucleusPrefab;
         public static Pool<Nucleus> nuclei;
@@ -27,8 +29,10 @@ namespace EclipseStudios.Orbital
             gameState = GameStates.FireBalls;
         }
 
-        public static void FireParticles(Vector2 direction, float magnitude)
+        public static IEnumerator FireParticles(Vector2 direction, float magnitude)
         {
+            //gameState = GameStates.WaitForBalls;
+
             for (int i = 0; i < maxParticles; i++)
             {
                 Particle temp = particles.GetObject();
@@ -36,6 +40,9 @@ namespace EclipseStudios.Orbital
                 temp.gameObject.SetActive(true);
 
                 temp.rigidbody2D.AddForce(direction * magnitude, ForceMode2D.Impulse);
+
+                if (i < maxParticles - 1)
+                    yield return new WaitForSeconds(Instance.delayBetweenParticles);
             }
         }
     }

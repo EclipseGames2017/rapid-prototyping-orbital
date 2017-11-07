@@ -6,6 +6,6 @@ namespace EclipseStudios.Orbital
 {
     public class Nucleus : MonoBehaviour
     {
-
+        public int requiredOrbits = 1;
     }
 }

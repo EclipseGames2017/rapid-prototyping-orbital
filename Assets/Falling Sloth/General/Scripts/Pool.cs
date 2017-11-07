@@ -70,7 +70,6 @@ namespace FallingSloth
             if (growWhenEmpty)
             {
                 AddNewObject();
-                objects[objects.Count - 1].gameObject.SetActive(true);
                 return objects[objects.Count - 1];
             }
             else

@@ -61,7 +61,7 @@ namespace FallingSloth
         {
             for (int i = 0; i < objects.Count; i++)
             {
-                if (objects[i].gameObject.activeSelf)
+                if (!objects[i].gameObject.activeSelf)
                 {
                     return objects[i];
                 }

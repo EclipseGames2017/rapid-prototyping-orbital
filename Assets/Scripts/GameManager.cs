@@ -9,6 +9,8 @@ namespace EclipseStudios.Orbital
     {
         public static GameStates gameState { get; protected set; }
 
+        public Launcher launcher;
+
         public Particle particlePrefab;
         public static Pool<Particle> particles;
         public static int maxParticles = 1;
@@ -27,7 +29,14 @@ namespace EclipseStudios.Orbital
 
         public static void FireParticles(Vector2 direction, float magnitude)
         {
-            throw new System.NotImplementedException();
+            for (int i = 0; i < maxParticles; i++)
+            {
+                Particle temp = particles.GetObject();
+                temp.transform.position = Instance.launcher.transform.position;
+                temp.gameObject.SetActive(true);
+
+                temp.rigidbody2D.AddForce(direction * magnitude, ForceMode2D.Impulse);
+            }
         }
     }
 }

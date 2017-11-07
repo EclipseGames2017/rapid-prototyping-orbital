@@ -7,7 +7,7 @@ namespace EclipseStudios.Orbital
     public class Launcher : MonoBehaviour
     {
         SpriteRenderer mainRenderer;
-        SpriteRenderer arrowRenderer;
+        SpriteRenderer[] arrowRenderers;
 
         bool isMouseButtonDown = false;
 
@@ -16,10 +16,12 @@ namespace EclipseStudios.Orbital
         public float minMagnitude = 0.2f;
         public float maxMagnitude = 2f;
 
+        public float forceMultiplier = 10f;
+
         void Start()
         {
             mainRenderer = GetComponent<SpriteRenderer>();
-            arrowRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+            arrowRenderers = transform.GetComponentsInChildren<SpriteRenderer>();
         }
 
         void Update()
@@ -35,18 +37,18 @@ namespace EclipseStudios.Orbital
                     if (hit.collider != null && hit.collider.gameObject == this.gameObject)
                     {
                         isMouseButtonDown = true;
-                        arrowRenderer.enabled = true;
+                        EnableArrowRenderers();
                     }
                 }
                 else if (isMouseButtonDown && Input.GetMouseButtonUp(0))
                 {
                     isMouseButtonDown = false;
-                    arrowRenderer.enabled = false;
+                    DisableArrowRenderers();
 
                     float magnitude = Mathf.Clamp(direction.magnitude, minMagnitude, maxMagnitude);
 
                     if (direction.magnitude >= minMagnitude)
-                        GameManager.FireParticles(direction.normalized, magnitude);
+                        GameManager.FireParticles(direction.normalized, magnitude * forceMultiplier);
                 }
             }
             else
@@ -71,6 +73,17 @@ namespace EclipseStudios.Orbital
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             return (launcherPosition - mousePosition);
+        }
+
+        void EnableArrowRenderers()
+        {
+            foreach (SpriteRenderer sr in arrowRenderers)
+                sr.enabled = true;
+        }
+        void DisableArrowRenderers()
+        {
+            foreach (SpriteRenderer sr in arrowRenderers)
+                sr.enabled = false;
         }
     }
 }

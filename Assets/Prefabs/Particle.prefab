@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 50739120422316238}
   - component: {fileID: 58251670361551660}
   - component: {fileID: 114791217352954690}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle
-  m_TagString: Untagged
+  m_TagString: Particle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,11 +54,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: de321c507da35924f9ab2fd091e66237, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592d723f4ed62d74db8fad9993c16731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody2D: {fileID: 0}
 --- !u!212 &212538234036681864
 SpriteRenderer:
   m_ObjectHideFlags: 1

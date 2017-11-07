@@ -1,4 +1,5 @@
 ﻿using FallingSloth;
+using FallingSloth.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -64,10 +65,14 @@ namespace EclipseStudios.Orbital
 
         void Destroy()
         {
+            AudioManager.PlaySound("ExplosionSound");
+
             ParticleDeathEffect temp = deathEffectPool.GetObject();
             temp.transform.position = transform.position;
             temp.gameObject.SetActive(true);
             gameObject.SetActive(false);
+
+            GameManager.ParticleDied();
         }
     }
 }

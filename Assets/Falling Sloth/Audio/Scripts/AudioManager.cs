@@ -3,10 +3,19 @@ using UnityEngine;
 
 namespace FallingSloth.Audio
 {
+    /// <summary>
+    /// A singleton class that manages multiple sounds, incuding music and sound effects.
+    /// </summary>
     public class AudioManager : SingletonBehaviour<AudioManager>
     {
+        /// <summary>
+        /// The list of sounds to manage.  Each should have a unique name.
+        /// </summary>
         public List<Sound> sounds;
 
+        /// <summary>
+        /// Sets up individual AudioSource components for each sound on this GameObject, and plays any sounds set to play on awake.
+        /// </summary>
         protected override void Awake()
         {
             base.Awake();
@@ -28,6 +37,10 @@ namespace FallingSloth.Audio
             }
         }
 
+        /// <summary>
+        /// Plays the sound with the given name.  If there is no sound with the given name, an exception is thrown.
+        /// </summary>
+        /// <param name="name">The name of the sound to play.</param>
         public static void PlaySound(string name)
         {
             foreach (Sound sound in Instance.sounds)
@@ -42,6 +55,10 @@ namespace FallingSloth.Audio
             throw new System.ArgumentOutOfRangeException("name", "No sound with the given name found.");
         }
 
+        /// <summary>
+        /// Stops the sound with the given name.  If there is no sound with the given name, an exception is thrown.
+        /// </summary>
+        /// <param name="name">The name of the sound to stop.</param>
         public static void StopSound(string name)
         {
             foreach (Sound sound in Instance.sounds)

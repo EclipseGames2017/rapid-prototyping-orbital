@@ -1,27 +1,33 @@
-﻿using System.Collections;
+﻿using FallingSloth;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : FallingSloth.SingletonBehaviour<GameManager>
+namespace EclipseStudios.Orbital
 {
-
-
-    void Update()
+    public class GameManager : SingletonBehaviour<GameManager>
     {
-        if (Input.touches.Length > 0)
+        public static GameStates gameState { get; protected set; }
+
+        public Particle particlePrefab;
+        public static Pool<Particle> particles;
+        public static int maxParticles = 1;
+
+        public Nucleus nucleusPrefab;
+        public static Pool<Nucleus> nuclei;
+
+        protected override void Awake()
         {
-            foreach (Touch touch in Input.touches)
-            {
-                if (touch.phase == TouchPhase.Began)
-                {
+            base.Awake();
 
-                }
-            }
+            particles = new Pool<Particle>(particlePrefab, maxParticles);
+
+            gameState = GameStates.FireBalls;
         }
-    }
 
-    bool CastRay(Touch touch)
-    {
-
+        public static void FireParticles(Vector2 direction, float magnitude)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

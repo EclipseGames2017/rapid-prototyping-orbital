@@ -14,7 +14,7 @@ namespace EclipseStudios.Orbital
 
         public Particle particlePrefab;
         public static Pool<Particle> particles;
-        public static int maxParticles = 10;
+        public static int maxParticles = 1;
         static int deadParticles = 0;
 
         public float delayBetweenParticles = .2f;
@@ -69,6 +69,11 @@ namespace EclipseStudios.Orbital
 
             // TODO: Check if any nucleus is on the bottom row
             // TODO: Define where the bottom row is
+
+            // if (!loseConditionMet)
+            gameState = GameStates.FireBalls;
+            // else
+            //     gameState = GameStates.GameOver;
         }
     }
 }

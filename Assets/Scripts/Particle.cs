@@ -16,7 +16,16 @@ namespace EclipseStudios.Orbital
         public ParticleDeathEffect deathEffectPrefab;
         static Pool<ParticleDeathEffect> deathEffectPool;
 
-        bool isDead = false;
+        bool d = false;
+        bool isDead
+        {
+            get { return d; }
+            set
+            {
+                d = value;
+                gameObject.layer = value ? 9 : 8;
+            }
+        }
 
         void Awake()
         {

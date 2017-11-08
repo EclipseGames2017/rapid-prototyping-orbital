@@ -1,4 +1,5 @@
 ﻿using FallingSloth;
+using FallingSloth.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,8 @@ namespace EclipseStudios.Orbital
 
         public Particle particlePrefab;
         public static Pool<Particle> particles;
-        public static int maxParticles = 3;
+        public static int maxParticles = 1;
+        static int deadParticles = 0;
 
         public float delayBetweenParticles = .2f;
 
@@ -31,10 +33,14 @@ namespace EclipseStudios.Orbital
 
         public static IEnumerator FireParticles(Vector2 direction, float magnitude)
         {
-            //gameState = GameStates.WaitForBalls;
+            gameState = GameStates.WaitForBalls;
+
+            deadParticles = 0;
 
             for (int i = 0; i < maxParticles; i++)
             {
+                AudioManager.PlaySound("ShootSound");
+
                 Particle temp = particles.GetObject();
                 temp.transform.position = Instance.launcher.transform.position;
                 temp.gameObject.SetActive(true);
@@ -44,6 +50,30 @@ namespace EclipseStudios.Orbital
                 if (i < maxParticles - 1)
                     yield return new WaitForSeconds(Instance.delayBetweenParticles);
             }
+        }
+
+        public static void ParticleDied()
+        {
+            deadParticles++;
+
+            if (deadParticles == maxParticles)
+            {
+                gameState = GameStates.SpawnNew;
+                Instance.MoveOldNucleiDown();
+            }
+        }
+
+        void MoveOldNucleiDown()
+        {
+            // TODO: Move all nuclei down one space
+
+            // TODO: Check if any nucleus is on the bottom row
+            // TODO: Define where the bottom row is
+
+            // if (!loseConditionMet)
+            gameState = GameStates.FireBalls;
+            // else
+            //     gameState = GameStates.GameOver;
         }
     }
 }

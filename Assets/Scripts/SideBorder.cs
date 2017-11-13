@@ -25,12 +25,13 @@ namespace EclipseStudios.Orbital
             // Used to offset the borders outwards.
             float offset = .4f;
 
+            // Set the position and scale based on which side it is.
             switch (side)
             {
                 case BorderSides.Top:
                 case BorderSides.Bottom:
                     transform.position = new Vector3(0f, (cam.orthographicSize + offset) * sign, 0f);
-                    transform.localScale = new Vector3(cam.orthographicSize * cam.aspect * 4f,
+                    transform.localScale = new Vector3(cam.orthographicSize * cam.aspect * 5f,
                                                         transform.localScale.y,
                                                         1f);
                     break;
@@ -38,7 +39,7 @@ namespace EclipseStudios.Orbital
                 case BorderSides.Right:
                     transform.position = new Vector3(((cam.orthographicSize * cam.aspect) + offset) * sign, 0f, 0f);
                     transform.localScale = new Vector3(transform.localScale.x,
-                                                        cam.orthographicSize * 4f,
+                                                        cam.orthographicSize * 5f,
                                                         1f);
                     break;
             }

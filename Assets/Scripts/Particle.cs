@@ -11,6 +11,7 @@ namespace EclipseStudios.Orbital
         [HideInInspector]
         new public Rigidbody2D rigidbody2D;
 
+        public float downForce = 1f;
         public float downforceWhenDead = 10f;
 
         public ParticleDeathEffect deathEffectPrefab;
@@ -44,9 +45,7 @@ namespace EclipseStudios.Orbital
 
         void FixedUpdate()
         {
-            if (!isDead) return;
-
-            rigidbody2D.AddForce(Vector2.down * downforceWhenDead * Time.fixedDeltaTime);
+            rigidbody2D.AddForce(Vector2.down * ((isDead) ? downforceWhenDead : downForce) * Time.fixedDeltaTime);
         }
 
         void OnCollisionEnter2D(Collision2D collision)

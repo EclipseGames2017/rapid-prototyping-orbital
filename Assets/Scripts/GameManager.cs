@@ -6,20 +6,50 @@ using UnityEngine;
 
 namespace EclipseStudios.Orbital
 {
+    /// <summary>
+    /// A singleton monobehaviour that manages core parts of the game.
+    /// </summary>
     public class GameManager : SingletonBehaviour<GameManager>
     {
+        /// <summary>
+        /// The current state of the game.
+        /// </summary>
         public static GameStates gameState { get; protected set; }
 
+        /// <summary>
+        /// A reference to the launcher object.
+        /// </summary>
         public Launcher launcher;
 
+        /// <summary>
+        /// The particle prefab to use.
+        /// </summary>
         public Particle particlePrefab;
+        /// <summary>
+        /// A pool of particles so that they can be reused.
+        /// </summary>
         public static Pool<Particle> particles;
-        public static int maxParticles = 1;
+        /// <summary>
+        /// The number of particles currently available to the player.
+        /// </summary>
+        public int maxParticles = 1;
+        /// <summary>
+        /// The number of particles that have been fired and subsequently been destroyed.
+        /// </summary>
         static int deadParticles = 0;
 
+        /// <summary>
+        /// When firing multiple balls, there will be a delay of this many seconds between each ball being fired.
+        /// </summary>
         public float delayBetweenParticles = .2f;
 
+        /// <summary>
+        /// The prefab for the things that will be orbited.
+        /// </summary>
         public Nucleus nucleusPrefab;
+        /// <summary>
+        /// A pool of nuclei that can be reused.
+        /// </summary>
         public static Pool<Nucleus> nuclei;
 
         protected override void Awake()
@@ -37,7 +67,7 @@ namespace EclipseStudios.Orbital
 
             deadParticles = 0;
 
-            for (int i = 0; i < maxParticles; i++)
+            for (int i = 0; i < Instance.maxParticles; i++)
             {
                 AudioManager.PlaySound("ShootSound");
 
@@ -47,7 +77,7 @@ namespace EclipseStudios.Orbital
 
                 temp.rigidbody2D.AddForce(direction * magnitude, ForceMode2D.Impulse);
 
-                if (i < maxParticles - 1)
+                if (i < Instance.maxParticles - 1)
                     yield return new WaitForSeconds(Instance.delayBetweenParticles);
             }
         }
@@ -56,7 +86,7 @@ namespace EclipseStudios.Orbital
         {
             deadParticles++;
 
-            if (deadParticles == maxParticles)
+            if (deadParticles == Instance.maxParticles)
             {
                 gameState = GameStates.SpawnNew;
                 Instance.MoveOldNucleiDown();

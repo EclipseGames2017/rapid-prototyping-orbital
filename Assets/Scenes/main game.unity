@@ -326,11 +326,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   persistent: 0
   launcher: {fileID: 1453896064}
-  particlePrefab: {fileID: 114791217352954690, guid: 994411b5ed674804e83ed5ddbcc0f098,
+  ballPrefab: {fileID: 114791217352954690, guid: 994411b5ed674804e83ed5ddbcc0f098,
     type: 2}
-  maxParticles: 1
-  delayBetweenParticles: 0.1
-  nucleusPrefab: {fileID: 0}
+  maxBalls: 1
+  delayBetweenBalls: 0.2
+  targetPrefab: {fileID: 114324249129244638, guid: 849bcf851c4347e45a1d71dee8031ea7,
+    type: 2}
 --- !u!4 &489115418
 Transform:
   m_ObjectHideFlags: 0

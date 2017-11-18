@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EclipseStudios.Orbital
 {
-    public class Particle : MonoBehaviour
+    public class Ball : MonoBehaviour
     {
         [HideInInspector]
         new public Rigidbody2D rigidbody2D;
@@ -14,8 +14,8 @@ namespace EclipseStudios.Orbital
         public float downForce = 1f;
         public float downforceWhenDead = 10f;
 
-        public ParticleDeathEffect deathEffectPrefab;
-        static Pool<ParticleDeathEffect> deathEffectPool;
+        public DeathEffect deathEffectPrefab;
+        static Pool<DeathEffect> deathEffectPool;
 
         bool d = false;
         bool isDead
@@ -34,7 +34,7 @@ namespace EclipseStudios.Orbital
 
             if (deathEffectPool == null)
             {
-                deathEffectPool = new Pool<ParticleDeathEffect>(deathEffectPrefab, 1);
+                deathEffectPool = new Pool<DeathEffect>(deathEffectPrefab, 1);
             }
         }
 
@@ -75,7 +75,7 @@ namespace EclipseStudios.Orbital
         {
             AudioManager.PlaySound("ExplosionSound");
 
-            ParticleDeathEffect temp = deathEffectPool.GetObject();
+            DeathEffect temp = deathEffectPool.GetObject();
             temp.transform.position = transform.position;
             temp.gameObject.SetActive(true);
             gameObject.SetActive(false);

@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 96308923357209836}
   - component: {fileID: 114791217352954690}
   m_Layer: 8
-  m_Name: Particle
+  m_Name: Ball
   m_TagString: Particle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1499790725286250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   rigidbody2D: {fileID: 0}
   downForce: 200
   downforceWhenDead: 1000
-  deathEffectPrefab: {fileID: 114916719828636502, guid: acf397daa5d50f747849ecc2939b75e4,
+  deathEffectPrefab: {fileID: 114356366852947622, guid: 56cc4f31c583f2f46a1565aa03b93300,
     type: 2}
 --- !u!212 &212538234036681864
 SpriteRenderer:
@@ -222,7 +222,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 33f47c793b7daa04d9cc5730b578ba4a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2340e2ec92b5f4746827c04da2a296fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

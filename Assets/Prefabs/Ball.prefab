@@ -55,10 +55,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 0.025
   m_Material: {fileID: 6200000, guid: de321c507da35924f9ab2fd091e66237, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -184,8 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 0}
-  downForce: 200
-  downforceWhenDead: 1000
+  downForce: 0
+  maxVelocityMagnitude: 10
+  maxGravityDistance: 2.5
   deathEffectPrefab: {fileID: 114356366852947622, guid: 56cc4f31c583f2f46a1565aa03b93300,
     type: 2}
 --- !u!212 &212538234036681864

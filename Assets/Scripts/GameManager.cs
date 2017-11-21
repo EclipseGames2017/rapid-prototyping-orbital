@@ -56,13 +56,32 @@ namespace EclipseStudios.Orbital
         /// </summary>
         public static Pool<Target> targetPool;
 
+        public float g = (float)6.674e-11;
+        public static float G { get { return Instance.g; } }
+
         protected override void Awake()
         {
             base.Awake();
 
             ballPool = new Pool<Ball>(ballPrefab, maxBalls);
+            targetPool = new Pool<Target>(targetPrefab, 0);
 
             gameState = GameStates.FireBalls;
+        }
+
+        void Start()
+        {
+            Target temp = targetPool.GetObject();
+            temp.transform.position = new Vector3(2f, 2f, 1f);
+            temp.gameObject.SetActive(true);
+
+            temp = targetPool.GetObject();
+            temp.transform.position = new Vector3(0f, 0f, 1f);
+            temp.gameObject.SetActive(true);
+
+            temp = targetPool.GetObject();
+            temp.transform.position = new Vector3(-2f, 2f, 1f);
+            temp.gameObject.SetActive(true);
         }
 
         public static IEnumerator FireParticles(Vector2 direction, float magnitude)
@@ -77,8 +96,8 @@ namespace EclipseStudios.Orbital
 
                 Ball temp = ballPool.GetObject();
                 temp.transform.position = Instance.launcher.transform.position;
+                temp.maxVelocityMagnitude = magnitude;
                 temp.gameObject.SetActive(true);
-
                 temp.rigidbody2D.AddForce(direction * magnitude, ForceMode2D.Impulse);
 
                 if (i < Instance.maxBalls - 1)

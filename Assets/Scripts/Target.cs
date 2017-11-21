@@ -12,8 +12,13 @@ namespace EclipseStudios.Orbital
         public DeathEffect deathEffectPrefab;
         static Pool<DeathEffect> deathEffectPool;
 
+        [HideInInspector]
+        new public Rigidbody2D rigidbody2D;
+
         void Start()
         {
+            rigidbody2D = GetComponent<Rigidbody2D>();
+
             if (deathEffectPool == null)
             {
                 deathEffectPool = new Pool<DeathEffect>(deathEffectPrefab, 1);

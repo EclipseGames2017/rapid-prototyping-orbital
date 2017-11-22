@@ -77,18 +77,5 @@ namespace FallingSloth
                 throw new System.Exception("Not enough objects in pool!");
             }
         }
-
-        public T[] GetActiveObjects()
-        {
-            List<T> rv = new List<T>();
-            foreach (T obj in objects)
-            {
-                if (obj.gameObject.activeSelf)
-                {
-                    rv.Add(obj);
-                }
-            }
-            return rv.ToArray();
-        }
     }
 }

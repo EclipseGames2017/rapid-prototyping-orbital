@@ -4,13 +4,11 @@ using UnityEngine;
 
 namespace EclipseStudios.Orbital
 {
-    public class DeathEffect : MonoBehaviour
+    public class ParticleDeathEffect : MonoBehaviour
     {
-        public float lifetime = 2f;
-
         void OnEnable()
         {
-            Invoke("Destroy", lifetime);
+            Invoke("Destroy", 2f);
         }
 
         void Destroy()

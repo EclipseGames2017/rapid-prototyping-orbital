@@ -6,18 +6,16 @@ using UnityEngine;
 
 namespace EclipseStudios.Orbital
 {
-    public class Ball : MonoBehaviour
+    public class Particle : MonoBehaviour
     {
         [HideInInspector]
         new public Rigidbody2D rigidbody2D;
 
         public float downForce = 1f;
+        public float downforceWhenDead = 10f;
 
-        public float maxVelocityMagnitude = 2f;
-        public float maxGravityDistance = 2;
-
-        public DeathEffect deathEffectPrefab;
-        static Pool<DeathEffect> deathEffectPool;
+        public ParticleDeathEffect deathEffectPrefab;
+        static Pool<ParticleDeathEffect> deathEffectPool;
 
         bool d = false;
         bool isDead
@@ -26,6 +24,7 @@ namespace EclipseStudios.Orbital
             set
             {
                 d = value;
+                gameObject.layer = value ? 9 : 8;
             }
         }
 
@@ -35,7 +34,7 @@ namespace EclipseStudios.Orbital
 
             if (deathEffectPool == null)
             {
-                deathEffectPool = new Pool<DeathEffect>(deathEffectPrefab, 1);
+                deathEffectPool = new Pool<ParticleDeathEffect>(deathEffectPrefab, 1);
             }
         }
 
@@ -43,28 +42,10 @@ namespace EclipseStudios.Orbital
         {
             isDead = false;
         }
-        
+
         void FixedUpdate()
         {
-            Target[] targets = GameManager.targetPool.GetActiveObjects();
-            Vector2 v = rigidbody2D.velocity;
-            foreach (Target target in targets)
-            {
-                float r = Vector2.Distance(this.transform.position, target.transform.position);
-
-                if (r > maxGravityDistance)
-                    continue;
-
-                float m1 = target.rigidbody2D.mass;
-                float m2 = this.rigidbody2D.mass;
-                float F = GameManager.G * ((m1 * m2) / Mathf.Pow(r, 2));
-                Vector2 direction = (target.transform.position - this.transform.position).normalized;
-                v += (F * direction);
-            }
-
-            v += Vector2.down * downForce;
-
-            rigidbody2D.velocity = Vector2.ClampMagnitude(v, maxVelocityMagnitude);
+            rigidbody2D.AddForce(Vector2.down * ((isDead) ? downforceWhenDead : downForce) * Time.fixedDeltaTime);
         }
 
         void OnCollisionEnter2D(Collision2D collision)
@@ -72,29 +53,29 @@ namespace EclipseStudios.Orbital
             switch (collision.gameObject.tag)
             {
                 case "LauncherPad":
-                case "Nucleus":
                     Destroy();
+                    break;
+                case "Nucleus":
+                    isDead = true;
                     break;
             }
         }
 
-        void OnTriggerEnter2D(Collider2D collider)
+        void OnTriggerEnter2D(Collider2D collision)
         {
-            switch (collider.gameObject.tag)
+            switch (collision.gameObject.tag)
             {
                 case "Nucleus":
+                    // TODO: Start orbiting the nucleus
                     break;
             }
-        }
-        void OnTriggerExit2D(Collider2D collider)
-        {
         }
 
         void Destroy()
         {
             AudioManager.PlaySound("ExplosionSound");
 
-            DeathEffect temp = deathEffectPool.GetObject();
+            ParticleDeathEffect temp = deathEffectPool.GetObject();
             temp.transform.position = transform.position;
             temp.gameObject.SetActive(true);
             gameObject.SetActive(false);

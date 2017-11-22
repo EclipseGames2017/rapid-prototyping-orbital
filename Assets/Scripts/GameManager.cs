@@ -24,92 +24,69 @@ namespace EclipseStudios.Orbital
         /// <summary>
         /// The particle prefab to use.
         /// </summary>
-        public Ball ballPrefab;
-
+        public Particle particlePrefab;
         /// <summary>
         /// A pool of particles so that they can be reused.
         /// </summary>
-        public static Pool<Ball> ballPool;
-
+        public static Pool<Particle> particles;
         /// <summary>
         /// The number of particles currently available to the player.
         /// </summary>
-        public int maxBalls = 1;
-
+        public int maxParticles = 1;
         /// <summary>
         /// The number of particles that have been fired and subsequently been destroyed.
         /// </summary>
-        static int deadBalls = 0;
+        static int deadParticles = 0;
 
         /// <summary>
         /// When firing multiple balls, there will be a delay of this many seconds between each ball being fired.
         /// </summary>
-        public float delayBetweenBalls = .2f;
+        public float delayBetweenParticles = .2f;
 
         /// <summary>
         /// The prefab for the things that will be orbited.
         /// </summary>
-        public Target targetPrefab;
-
+        public Nucleus nucleusPrefab;
         /// <summary>
         /// A pool of nuclei that can be reused.
         /// </summary>
-        public static Pool<Target> targetPool;
-
-        public float g = (float)6.674e-11;
-        public static float G { get { return Instance.g; } }
+        public static Pool<Nucleus> nuclei;
 
         protected override void Awake()
         {
             base.Awake();
 
-            ballPool = new Pool<Ball>(ballPrefab, maxBalls);
-            targetPool = new Pool<Target>(targetPrefab, 0);
+            particles = new Pool<Particle>(particlePrefab, maxParticles);
 
             gameState = GameStates.FireBalls;
-        }
-
-        void Start()
-        {
-            Target temp = targetPool.GetObject();
-            temp.transform.position = new Vector3(2f, 2f, 1f);
-            temp.gameObject.SetActive(true);
-
-            temp = targetPool.GetObject();
-            temp.transform.position = new Vector3(0f, 0f, 1f);
-            temp.gameObject.SetActive(true);
-
-            temp = targetPool.GetObject();
-            temp.transform.position = new Vector3(-2f, 2f, 1f);
-            temp.gameObject.SetActive(true);
         }
 
         public static IEnumerator FireParticles(Vector2 direction, float magnitude)
         {
             gameState = GameStates.WaitForBalls;
 
-            deadBalls = 0;
+            deadParticles = 0;
 
-            for (int i = 0; i < Instance.maxBalls; i++)
+            for (int i = 0; i < Instance.maxParticles; i++)
             {
                 AudioManager.PlaySound("ShootSound");
 
-                Ball temp = ballPool.GetObject();
+                Particle temp = particles.GetObject();
                 temp.transform.position = Instance.launcher.transform.position;
-                temp.maxVelocityMagnitude = magnitude;
                 temp.gameObject.SetActive(true);
+
                 temp.rigidbody2D.AddForce(direction * magnitude, ForceMode2D.Impulse);
 
-                if (i < Instance.maxBalls - 1)
-                    yield return new WaitForSeconds(Instance.delayBetweenBalls);
+                if (i < Instance.maxParticles - 1)
+                    yield return new WaitForSeconds(Instance.delayBetweenParticles);
             }
         }
 
         public static void ParticleDied()
         {
-            deadBalls++;
+            deadParticles++;
 
-            if (deadBalls == Instance.maxBalls)
+            if (deadParticles == Instance.maxParticles)
             {
                 gameState = GameStates.SpawnNew;
                 Instance.MoveOldNucleiDown();

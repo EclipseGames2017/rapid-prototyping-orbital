@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace EclipseStudios.Orbital
 {
-    public class Nucleus : MonoBehaviour
+    public class BallPowerup : MonoBehaviour
     {
-        public int requiredOrbits = 1;
+        
     }
 }

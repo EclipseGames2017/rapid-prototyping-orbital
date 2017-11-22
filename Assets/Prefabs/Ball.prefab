@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114791217352954690}
   m_Layer: 8
   m_Name: Ball
-  m_TagString: Particle
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.075
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 0.1
@@ -189,6 +189,7 @@ MonoBehaviour:
   maxGravityDistance: 2.5
   deathEffectPrefab: {fileID: 114356366852947622, guid: 56cc4f31c583f2f46a1565aa03b93300,
     type: 2}
+  velocityReductionMultiplier: 0.5
 --- !u!212 &212538234036681864
 SpriteRenderer:
   m_ObjectHideFlags: 1

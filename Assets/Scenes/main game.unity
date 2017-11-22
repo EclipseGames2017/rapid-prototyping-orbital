@@ -360,7 +360,7 @@ MonoBehaviour:
   launcher: {fileID: 1453896064}
   ballPrefab: {fileID: 114791217352954690, guid: 994411b5ed674804e83ed5ddbcc0f098,
     type: 2}
-  maxBalls: 1
+  maxBalls: 20
   delayBetweenBalls: 0.2
   targetPrefab: {fileID: 114324249129244638, guid: 849bcf851c4347e45a1d71dee8031ea7,
     type: 2}

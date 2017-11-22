@@ -19,6 +19,8 @@ namespace EclipseStudios.Orbital
         public DeathEffect deathEffectPrefab;
         static Pool<DeathEffect> deathEffectPool;
 
+        public float velocityReductionMultiplier = .85f;
+
         bool d = false;
         bool isDead
         {
@@ -72,7 +74,7 @@ namespace EclipseStudios.Orbital
             switch (collision.gameObject.tag)
             {
                 case "LauncherPad":
-                case "Nucleus":
+                case "Target":
                     Destroy();
                     break;
             }
@@ -82,12 +84,19 @@ namespace EclipseStudios.Orbital
         {
             switch (collider.gameObject.tag)
             {
-                case "Nucleus":
+                case "Target":
+                    rigidbody2D.velocity *= velocityReductionMultiplier;
                     break;
             }
         }
         void OnTriggerExit2D(Collider2D collider)
         {
+            switch (collider.gameObject.tag)
+            {
+                case "Target":
+                    rigidbody2D.velocity /= velocityReductionMultiplier;
+                    break;
+            }
         }
 
         void Destroy()

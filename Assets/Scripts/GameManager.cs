@@ -2,6 +2,8 @@
 using FallingSloth.Audio;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 
 namespace EclipseStudios.Orbital
@@ -32,6 +34,19 @@ namespace EclipseStudios.Orbital
         public static Pool<Ball> ballPool;
 
         /// <summary>
+        /// The prefab for the things that will be orbited.
+        /// </summary>
+        public Target targetPrefab;
+
+        /// <summary>
+        /// A pool of nuclei that can be reused.
+        /// </summary>
+        public static Pool<Target> targetPool;
+
+        public BallPowerup powerupPrefab;
+        public static Pool<BallPowerup> powerupPool;
+
+        /// <summary>
         /// The number of particles currently available to the player.
         /// </summary>
         public int maxBalls = 1;
@@ -46,46 +61,38 @@ namespace EclipseStudios.Orbital
         /// </summary>
         public float delayBetweenBalls = .2f;
 
-        /// <summary>
-        /// The prefab for the things that will be orbited.
-        /// </summary>
-        public Target targetPrefab;
-
-        /// <summary>
-        /// A pool of nuclei that can be reused.
-        /// </summary>
-        public static Pool<Target> targetPool;
-
         public float g = (float)6.674e-11;
         public static float G { get { return Instance.g; } }
+
+        public float objectMoveSpeed = 5f;
+
+        int turnCount = 0;
 
         protected override void Awake()
         {
             base.Awake();
 
             ballPool = new Pool<Ball>(ballPrefab, maxBalls);
-            targetPool = new Pool<Target>(targetPrefab, 0);
+            targetPool = new Pool<Target>(targetPrefab, 5);
+            powerupPool = new Pool<BallPowerup>(powerupPrefab, 5);
 
             gameState = GameStates.FireBalls;
         }
 
         void Start()
         {
-            Target temp = targetPool.GetObject();
-            temp.transform.position = new Vector3(2f, 2f, 1f);
-            temp.gameObject.SetActive(true);
-
-            temp = targetPool.GetObject();
-            temp.transform.position = new Vector3(0f, 0f, 1f);
-            temp.gameObject.SetActive(true);
-
-            temp = targetPool.GetObject();
-            temp.transform.position = new Vector3(-2f, 2f, 1f);
-            temp.gameObject.SetActive(true);
+            for (int i = 0; i < 5; i++)
+            {
+                Target temp = targetPool.GetObject();
+                temp.transform.position = new Vector3(Random.Range(-2, 3), 4-i, 4);
+                temp.gameObject.SetActive(true);
+            }
         }
 
         public static IEnumerator FireParticles(Vector2 direction, float magnitude)
         {
+            Instance.turnCount++;
+
             gameState = GameStates.WaitForBalls;
 
             deadBalls = 0;
@@ -112,19 +119,46 @@ namespace EclipseStudios.Orbital
             if (deadBalls == Instance.maxBalls)
             {
                 gameState = GameStates.SpawnNew;
-                Instance.MoveOldNucleiDown();
+                Instance.SpawnNewStuff();
             }
         }
 
-        void MoveOldNucleiDown()
+        void SpawnNewStuff()
         {
-            // TODO: Move all nuclei down one space
+            //TODO: Spawn new stuff
 
-            // TODO: Check if any nucleus is on the bottom row
-            // TODO: Define where the bottom row is
+            StartCoroutine(MoveStuffDown());
+        }
+
+        IEnumerator MoveStuffDown()
+        {
+            // Get a list of all the things that need to be moved down.
+            List<GameObject> objectsToMove = new List<GameObject>();
+            objectsToMove.AddRange(targetPool.GetActiveObjects().Select(obj => obj.gameObject));
+            objectsToMove.AddRange(powerupPool.GetActiveObjects().Select(obj => obj.gameObject));
+
+            // Sort the list by y position: lowest first
+            objectsToMove.Sort((GameObject obj1, GameObject obj2) => { return obj1.transform.position.y.CompareTo(obj2.transform.position.y); });
+
+            for (int i = 0; i < objectsToMove.Count; i++)
+            {
+                Vector3 startPos = objectsToMove[i].transform.position;
+                Vector3 endPos;
+                if (startPos.y > 5f)
+                    endPos = new Vector3(startPos.x, 4f, startPos.z);
+                else
+                    endPos = new Vector3(startPos.x, startPos.y - 1f, startPos.z);
+
+                for (float t = 0f; t <= 1f; t += Time.deltaTime*objectMoveSpeed)
+                {
+                    objectsToMove[i].transform.position = Vector3.Lerp(startPos, endPos, t);
+                    yield return null;
+                }
+                objectsToMove[i].transform.position = endPos;
+            }
 
             // if (!loseConditionMet)
-            gameState = GameStates.FireBalls;
+                gameState = GameStates.FireBalls;
             // else
             //     gameState = GameStates.GameOver;
         }

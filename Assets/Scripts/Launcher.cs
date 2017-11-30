@@ -14,10 +14,7 @@ namespace EclipseStudios.Orbital
         /// </summary>
         SpriteRenderer mainRenderer;
 
-        /// <summary>
-        /// An array of sprite renderers used for the arrows coming out from the launcher.
-        /// </summary>
-        SpriteRenderer[] arrowRenderers;
+        public LineRenderer mLineRenderer;
 
         /// <summary>
         /// Whether or not the mouse button is currently being held down.
@@ -28,6 +25,8 @@ namespace EclipseStudios.Orbital
         /// The direction the balls will be fired in.
         /// </summary>
         Vector2 direction;
+        float angle;
+        float shotMagnitude;
 
         /// <summary>
         /// The minimum magnitude for the direction vector.
@@ -49,11 +48,13 @@ namespace EclipseStudios.Orbital
         /// </summary>
         public float maxAngle = 85f;
 
+        int fingerID = -1;
+        Vector2 touchStartPosition = -Vector2.one;
+
         void Start()
         {
-            // Get the renderers for the launcher itself as well as all children.
+            // Get the renderers for the launcher itself.
             mainRenderer = GetComponent<SpriteRenderer>();
-            arrowRenderers = transform.GetComponentsInChildren<SpriteRenderer>();
         }
 
         void Update()
@@ -64,97 +65,94 @@ namespace EclipseStudios.Orbital
                 // If the player can fire, they should be shown the thing they're firing from.
                 mainRenderer.enabled = true;
 
-                // If the mouse button was pressed this frame, check if it hit this object.
-                if (Input.GetMouseButtonDown(0))
+                #region Touch Input
+                #if UNITY_ANDROID || UNITY_IOS
+                // If no touch has been caught yet, check for one
+                if (fingerID == -1)
                 {
-                    RaycastHit2D hit = Physics2D.GetRayIntersection(new Ray(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.forward));
-
-                    if (hit.collider != null && hit.collider.gameObject == this.gameObject)
+                    foreach (Touch t in Input.touches)
                     {
-                        // Set this so we know if the button is still being held.
-                        isMouseButtonDown = true;
-                        // Enable all arrow renderers.
-                        EnableArrowRenderers();
+                        if (t.phase == TouchPhase.Began)
+                        {
+                            Debug.Log("Touch began!");
+                            fingerID = t.fingerId;
+                            touchStartPosition = Camera.main.ScreenToWorldPoint(t.position);
+                            break;
+                        }
                     }
                 }
-                // Otherwise, if the mouse button was released this frame...
-                else if (isMouseButtonDown && Input.GetMouseButtonUp(0))
+                else if (fingerID >= 0)
                 {
-                    // Set this so we now the button's not being held any more.
-                    isMouseButtonDown = false;
-                    // Disable all arrow renderers.
-                    DisableArrowRenderers();
-
-                    // Calculate the angle to fire at.
-                    float angle = Vector2.Angle(Vector2.up, direction);
-
-                    // If the angle is withing the acceptable range, fire.
-                    if (angle <= maxAngle)
+                    foreach (Touch t in Input.touches)
                     {
-                        // Clamp the magnitude.
-                        float magnitude = Mathf.Clamp(direction.magnitude, minMagnitude, maxMagnitude);
-
-                        // Fire the particles.
-                        StartCoroutine(GameManager.FireParticles(direction.normalized, magnitude * forceMultiplier));
+                        if (t.fingerId == fingerID)
+                        {
+                            switch (t.phase)
+                            {
+                                case TouchPhase.Canceled:
+                                    fingerID = -1;
+                                    touchStartPosition = -Vector2.one;
+                                    break;
+                                case TouchPhase.Moved:
+                                    SetDirectionAndAngle(touchStartPosition, Camera.main.ScreenToWorldPoint(t.position));
+                                    break;
+                                case TouchPhase.Ended:
+                                    SetDirectionAndAngle(touchStartPosition, Camera.main.ScreenToWorldPoint(t.position));
+                                    StartCoroutine(GameManager.FireParticles(direction, Mathf.Clamp(shotMagnitude * forceMultiplier, minMagnitude, maxMagnitude)));
+                                    fingerID = -1;
+                                    touchStartPosition = -Vector2.one;
+                                    break;
+                            }
+                        }
                     }
                 }
+#endif
+                #endregion
+                #region Mouse Input
+                #if !(UNITY_ANDROID || UNITY_IOS) || UNITY_EDITOR
+                if (fingerID == -1)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        fingerID = -2;
+                        touchStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    }
+                }
+                else if (fingerID == -2)
+                {
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        SetDirectionAndAngle(touchStartPosition, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                        StartCoroutine(GameManager.FireParticles(direction, Mathf.Clamp(shotMagnitude * forceMultiplier, minMagnitude, maxMagnitude)));
+                        fingerID = -1;
+                        touchStartPosition = -Vector2.one;
+                    }
+                    else if (Input.GetMouseButton(0))
+                    {
+                        SetDirectionAndAngle(touchStartPosition, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    }
+                    else
+                    {
+                        fingerID = -1;
+                        touchStartPosition = -Vector2.one;
+                    }
+                }
+                #endif
+                #endregion
             }
             // If the player is not allowed to fire, hide the launcher.
             else
             {
                 mainRenderer.enabled = false;
             }
-
-            //
-            if (isMouseButtonDown)
-            {
-                // Calculate the rotation for the launcher.
-                Vector2 launcherPosition = transform.position;
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                direction = launcherPosition - mousePosition;
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-                transform.rotation = Quaternion.Euler(0f, 0f, angle);
-
-                // Calculate the angle of the trajectory.
-                float fireAngle = Vector2.Angle(Vector2.up, direction);
-
-                // Enable or disable arrow renderers based on the current angle.
-                if (fireAngle <= maxAngle)
-                    EnableArrowRenderers();
-                else
-                    DisableArrowRenderers();
-            }
         }
 
-        /// <summary>
-        /// Gets the distance between the launcher and the mouse position.
-        /// </summary>
-        /// <returns>A direction vector from the launcher to the mouse position.</returns>
-        Vector2 GetShotDirection()
+        void SetDirectionAndAngle(Vector2 start, Vector2 end)
         {
-            Vector2 launcherPosition = transform.position;
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            return (launcherPosition - mousePosition);
-        }
-
-        /// <summary>
-        /// Enables all arrow renderers.
-        /// </summary>
-        void EnableArrowRenderers()
-        {
-            foreach (SpriteRenderer sr in arrowRenderers)
-                sr.enabled = true;
-        }
-
-        /// <summary>
-        /// Disables all arrow renderers.
-        /// </summary>
-        void DisableArrowRenderers()
-        {
-            foreach (SpriteRenderer sr in arrowRenderers)
-                sr.enabled = false;
+            direction = (start - end);
+            shotMagnitude = direction.magnitude;
+            direction = direction.normalized;
+            angle = Vector2.Angle(Vector2.up, direction);
         }
     }
 }

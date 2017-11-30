@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace FallingSloth
@@ -8,13 +7,12 @@ namespace FallingSloth
     /// <summary>
     /// A pool of objects that gets instantiated once and then re-uses those objects.  Optionally grows when an object is requested but there is not one available.
     /// </summary>
-    /// <typeparam name="T">The type of object to pool.  Must inherit from MonoBehaviour.</typeparam>
-    public class Pool<T> where T : MonoBehaviour
+    public class GameObjectPool
     {
         /// <summary>
         /// The prefab to use.
         /// </summary>
-        T prefab;
+        GameObject prefab;
 
         /// <summary>
         /// Whether the pool will grow or not.
@@ -24,7 +22,7 @@ namespace FallingSloth
         /// <summary>
         /// The pool of objects.
         /// </summary>
-        List<T> objects;
+        List<GameObject> objects;
 
         /// <summary>
         /// Creates a new pool of objects.
@@ -32,12 +30,12 @@ namespace FallingSloth
         /// <param name="prefab">The prefab of type T to use.</param>
         /// <param name="size">The number of objects to put in the pool.</param>
         /// <param name="growWhenEmpty">Whether or not the pool should grow.  Defaults to true.</param>
-        public Pool(T prefab, int size, bool growWhenEmpty = true)
+        public GameObjectPool(GameObject prefab, int size, bool growWhenEmpty = true)
         {
             this.prefab = prefab;
             this.growWhenEmpty = growWhenEmpty;
             
-            objects = new List<T>();
+            objects = new List<GameObject>();
             for (int i = 0; i < size; i++)
             {
                 AddNewObject();
@@ -49,8 +47,8 @@ namespace FallingSloth
         /// </summary>
         void AddNewObject()
         {
-            T temp = GameObject.Instantiate(prefab);
-            temp.gameObject.SetActive(false);
+            GameObject temp = GameObject.Instantiate(prefab);
+            temp.SetActive(false);
             objects.Add(temp);
         }
 
@@ -58,13 +56,11 @@ namespace FallingSloth
         /// Returns an object from the pool.  If there is no object available and <see cref="growWhenEmpty"/> is true, then a new object is added and returned.  If <see cref="growWhenEmpty"/> is false, an exception is thrown.
         /// </summary>
         /// <returns>An object from the pool.  Note that the object with not be active.</returns>
-        public T GetObject()
+        public GameObject GetObject()
         {
-            objects.RemoveAll(obj => obj == null);
-
             for (int i = 0; i < objects.Count; i++)
             {
-                if (!objects[i].gameObject.activeSelf)
+                if (objects[i].activeSelf)
                 {
                     return objects[i];
                 }
@@ -78,30 +74,6 @@ namespace FallingSloth
             else
             {
                 throw new System.Exception("Not enough objects in pool!");
-            }
-        }
-
-        public T[] GetActiveObjects()
-        {
-            List<T> activeObjects = new List<T>();
-
-            for (int i = 0; i < objects.Count; i++)
-            {
-                if (objects[i].gameObject.activeSelf)
-                {
-                    activeObjects.Add(objects[i]);
-                }
-            }
-
-            return activeObjects.ToArray();
-        }
-
-        public void DestroyPool()
-        {
-            for (int i = objects.Count - 1; i >= 0; i--)
-            {
-                GameObject.Destroy(objects[i].gameObject);
-                objects.RemoveAt(i);
             }
         }
     }

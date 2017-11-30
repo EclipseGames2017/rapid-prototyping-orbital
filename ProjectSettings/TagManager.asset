@@ -4,10 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Particle
-  - Nucleus
   - Launcher
   - LauncherPad
+  - Ball
+  - Target
+  - Powerup
   layers:
   - Default
   - TransparentFX
@@ -17,9 +18,9 @@ TagManager:
   - UI
   - 
   - 
-  - Particles
-  - DeadParticles
-  - Nuclei
+  - Balls
+  - DeadBalls
+  - Targets
   - 
   - 
   - 

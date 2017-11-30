@@ -13,3 +13,8 @@
 .webgl-content .footer .webgl-logo, .title, {height: 100%; display: inline-block; background: transparent center no-repeat;} 
 .webgl-content .footer .webgl-logo {background-image: url('webgl-logo.png'); width: 204px; float: left;}
 .webgl-content .footer .title {margin-right: 10px; float: right;}
+
+#gameContainer
+{
+	margin: auto 0;
+}

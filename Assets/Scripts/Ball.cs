@@ -7,25 +7,62 @@ using UnityEngine.UI;
 
 namespace EclipseStudios.Orbital
 {
+    /// <summary>
+    /// A ball fired by the player.
+    /// </summary>
     public class Ball : MonoBehaviour
     {
+        /// <summary>
+        /// The rigidbody attached to this ball instance.
+        /// </summary>
         [HideInInspector]
         new public Rigidbody2D rigidbody2D;
         
+        /// <summary>
+        /// The multiplier for how fast the ball takes down targets.
+        /// </summary>
         public float ballPower;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float PowerIncrease;
 
+        /// <summary>
+        /// The trail renderer attached to this ball instance.
+        /// </summary>
         TrailRenderer trailRenderer;
 
+        /// <summary>
+        /// The downward force applied to the ball each frame.
+        /// </summary>
         public float downForce = 1f;
 
+        /// <summary>
+        /// The maximum magnitude for the balls velocity.  Set when firing the ball.
+        /// </summary>
         public float maxVelocityMagnitude = 2f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float maxGravityDistance = 2;
 
+        /// <summary>
+        /// The prefab to use for ball death effects.
+        /// </summary>
         public DeathEffect deathEffectPrefab;
+
+        /// <summary>
+        /// A pool of the deathEffectPrefab.
+        /// </summary>
         public static Pool<DeathEffect> deathEffectPool;
 
+        /// <summary>
+        /// The balls velocity will be multiplied by this value when entering a target's trigger, and divided by it when leaving.
+        /// </summary>
         public float velocityReductionMultiplier = .85f;
+
 
         public ScoreManager scoremanager;
 

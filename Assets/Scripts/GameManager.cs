@@ -260,9 +260,11 @@ namespace EclipseStudios.Orbital
             {
                 case ShowResult.Failed:
                     Debug.LogError("Ad failed to show!");
+                    PlayAgain();
                     break;
                 case ShowResult.Skipped:
                     Debug.LogWarning("Bastard skipped the ad!");
+                    PlayAgain();
                     break;
                 case ShowResult.Finished:
                     Debug.Log("Ad complete!");

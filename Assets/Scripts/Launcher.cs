@@ -14,7 +14,7 @@ namespace EclipseStudios.Orbital
         /// </summary>
         SpriteRenderer mainRenderer;
 
-        public LineRenderer mLineRenderer;
+        public LineRenderer lineRenderer;
 
         /// <summary>
         /// Whether or not the mouse button is currently being held down.
@@ -64,6 +64,7 @@ namespace EclipseStudios.Orbital
             {
                 // If the player can fire, they should be shown the thing they're firing from.
                 mainRenderer.enabled = true;
+                lineRenderer.enabled = true;
 
                 #region Touch Input
                 #if UNITY_ANDROID || UNITY_IOS
@@ -144,6 +145,7 @@ namespace EclipseStudios.Orbital
             else
             {
                 mainRenderer.enabled = false;
+                lineRenderer.enabled = false;
             }
         }
 

@@ -64,7 +64,6 @@ namespace EclipseStudios.Orbital
             {
                 // If the player can fire, they should be shown the thing they're firing from.
                 mainRenderer.enabled = true;
-                lineRenderer.enabled = true;
 
                 #region Touch Input
                 #if UNITY_ANDROID || UNITY_IOS
@@ -99,9 +98,7 @@ namespace EclipseStudios.Orbital
                                     break;
                                 case TouchPhase.Ended:
                                     SetDirectionAndAngle(touchStartPosition, Camera.main.ScreenToWorldPoint(t.position));
-                                    StartCoroutine(GameManager.FireParticles(direction, Mathf.Clamp(shotMagnitude * forceMultiplier, minMagnitude, maxMagnitude)));
-                                    fingerID = -1;
-                                    touchStartPosition = -Vector2.one;
+                                    Fire();
                                     break;
                             }
                         }
@@ -124,9 +121,7 @@ namespace EclipseStudios.Orbital
                     if (Input.GetMouseButtonUp(0))
                     {
                         SetDirectionAndAngle(touchStartPosition, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                        StartCoroutine(GameManager.FireParticles(direction, Mathf.Clamp(shotMagnitude * forceMultiplier, minMagnitude, maxMagnitude)));
-                        fingerID = -1;
-                        touchStartPosition = -Vector2.one;
+                        Fire();
                     }
                     else if (Input.GetMouseButton(0))
                     {
@@ -154,7 +149,23 @@ namespace EclipseStudios.Orbital
             direction = (start - end);
             shotMagnitude = direction.magnitude;
             direction = direction.normalized;
-            angle = Vector2.Angle(Vector2.up, direction);
+            angle = Vector2.SignedAngle(Vector2.up, direction);
+
+            if (Mathf.Abs(angle) <= maxAngle)
+            {
+                lineRenderer.enabled = true;
+                lineRenderer.transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
+            else
+                lineRenderer.enabled = false;
+        }
+
+        void Fire()
+        {
+            if (Mathf.Abs(angle) <= maxAngle)
+                StartCoroutine(GameManager.FireParticles(direction, Mathf.Clamp(shotMagnitude * forceMultiplier, minMagnitude, maxMagnitude)));
+            fingerID = -1;
+            touchStartPosition = -Vector2.one;
         }
     }
 }

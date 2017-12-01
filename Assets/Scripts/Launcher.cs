@@ -14,12 +14,7 @@ namespace EclipseStudios.Orbital
         /// </summary>
         SpriteRenderer mainRenderer;
 
-        public LineRenderer lineRenderer;
-
-        /// <summary>
-        /// Whether or not the mouse button is currently being held down.
-        /// </summary>
-        bool isMouseButtonDown = false;
+        public LineRenderer trajectoryLine;
 
         /// <summary>
         /// The direction the balls will be fired in.
@@ -140,7 +135,7 @@ namespace EclipseStudios.Orbital
             else
             {
                 mainRenderer.enabled = false;
-                lineRenderer.enabled = false;
+                trajectoryLine.enabled = false;
             }
         }
 
@@ -153,11 +148,11 @@ namespace EclipseStudios.Orbital
 
             if (Mathf.Abs(angle) <= maxAngle)
             {
-                lineRenderer.enabled = true;
-                lineRenderer.transform.rotation = Quaternion.Euler(0, 0, angle);
+                trajectoryLine.enabled = true;
+                trajectoryLine.transform.rotation = Quaternion.Euler(0, 0, angle);
             }
             else
-                lineRenderer.enabled = false;
+                trajectoryLine.enabled = false;
         }
 
         void Fire()

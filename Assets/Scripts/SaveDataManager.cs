@@ -45,6 +45,8 @@ namespace EclipseStudios.Orbital
 
     public class SaveData
     {
-        public float highscore;
+        public float highscore = 0;
+
+        public float volume = 1f;
     }
 }

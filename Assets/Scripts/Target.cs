@@ -16,7 +16,7 @@ namespace EclipseStudios.Orbital
         public TextMesh targetText;
 
         [HideInInspector]
-        new public Rigidbody2D rigidbody2D;
+        public Rigidbody2D rigidbody2D;
 
         void Start()
         {

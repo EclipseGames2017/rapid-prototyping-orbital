@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FallingSloth;
+using FallingSloth.Audio;
 
 namespace EclipseStudios.Orbital
 {
@@ -37,6 +38,7 @@ namespace EclipseStudios.Orbital
 
         void Destroy()
         {
+            AudioManager.PlaySound("target_destroy");
             DeathEffect temp = deathEffectPool.GetObject();
             temp.transform.position = transform.position;
             temp.gameObject.SetActive(true);

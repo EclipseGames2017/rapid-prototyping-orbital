@@ -221,6 +221,7 @@ namespace EclipseStudios.Orbital
                     switch (objectsToMove[i].tag)
                     {
                         case "Target":
+                            AudioManager.PlaySound("game_over_sound");
                             gameState = GameStates.GameOver;
                             Debug.Log("Showing continue screen...");
                             ContinueScreen.Show();

@@ -67,3 +67,59 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - name: pickup_powerup
+    audioClip: {fileID: 8300000, guid: 76e5843c668de7c43b58d52881c622eb, type: 3}
+    playOnAwake: 0
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: game_over_sound
+    audioClip: {fileID: 8300000, guid: a8856d02e89a6d44382da7ae10d8c846, type: 3}
+    playOnAwake: 0
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: increase_multiplier
+    audioClip: {fileID: 8300000, guid: 78c7ef4dff2b33244836728bdb703058, type: 3}
+    playOnAwake: 0
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: new_highscore
+    audioClip: {fileID: 8300000, guid: dc563f3c59171ae4ebbfea7108a98a4a, type: 3}
+    playOnAwake: 0
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: target_destroy
+    audioClip: {fileID: 8300000, guid: ed83b0dcf3decf64f83115afff40b6a1, type: 3}
+    playOnAwake: 0
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: target_orbit
+    audioClip: {fileID: 8300000, guid: 7e616669ce2cac84cad96518d260116b, type: 3}
+    playOnAwake: 0
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: wall_bounce
+    audioClip: {fileID: 8300000, guid: 887b8afe3417aae4d8b396ad71acdb19, type: 3}
+    playOnAwake: 0
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: ExplosionSound
+    audioClip: {fileID: 8300000, guid: 17451c03ef0cf964fb4df70f7c47c13b, type: 3}
+    playOnAwake: 0
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}

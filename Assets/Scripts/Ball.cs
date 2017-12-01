@@ -144,6 +144,10 @@ namespace EclipseStudios.Orbital
         {
             switch (collision.gameObject.tag)
             {
+                case "wall":
+                    AudioManager.PlaySound("wall_bounce");
+                    break;
+
                 case "LauncherPad":
                 case "Target":
                     scoremanager.multiplier = 1;
@@ -152,11 +156,14 @@ namespace EclipseStudios.Orbital
             }
         }
 
+        // Entering the target gravity field will increase points and reduce velocity of ball
         void OnTriggerEnter2D(Collider2D collider)
         {
             switch (collider.gameObject.tag)
             {
                 case "Target":
+                    AudioManager.PlaySound("increase_multiplier");
+                    AudioManager.PlaySound("target_orbit");
                     rigidbody2D.velocity *= velocityReductionMultiplier;
                     scoremanager.multiplier++;
                     
@@ -165,6 +172,7 @@ namespace EclipseStudios.Orbital
             // Colliding with a powerup means the ball power will increase and will destroy the powerup
             if (collider.gameObject.tag == "Powerup")
             {
+                AudioManager.PlaySound("pickup_powerup");
                 ballPower += PowerIncrease;
                 collider.gameObject.GetComponent<BallPowerup>().Destroy();
             }

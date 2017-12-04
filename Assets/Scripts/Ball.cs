@@ -16,7 +16,7 @@ namespace EclipseStudios.Orbital
         /// The rigidbody attached to this ball instance.
         /// </summary>
         [HideInInspector]
-        public Rigidbody2D rigidbody2D;
+        new public Rigidbody2D rigidbody2D;
         
         /// <summary>
         /// The multiplier for how fast the ball takes down targets.

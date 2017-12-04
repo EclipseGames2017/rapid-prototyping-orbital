@@ -16,7 +16,10 @@ namespace EclipseStudios.Orbital
         public TextMesh targetText;
 
         [HideInInspector]
-        public Rigidbody2D rigidbody2D;
+        new public Rigidbody2D rigidbody2D;
+
+        [HideInInspector]
+        new public Light light;
 
         void Start()
         {

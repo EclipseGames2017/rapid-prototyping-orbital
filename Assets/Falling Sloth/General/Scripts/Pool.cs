@@ -60,6 +60,8 @@ namespace FallingSloth
         /// <returns>An object from the pool.  Note that the object with not be active.</returns>
         public T GetObject()
         {
+            objects.RemoveAll(obj => obj == null);
+
             for (int i = 0; i < objects.Count; i++)
             {
                 if (!objects[i].gameObject.activeSelf)

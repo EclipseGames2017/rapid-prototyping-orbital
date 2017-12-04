@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FallingSloth;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ namespace EclipseStudios.Orbital
         // Set score texts and resets current score and multiplier
         void Start()
         {
-            highScore = SaveDataManager.data.highscore;
+            highScore = SaveDataManager<OrbitalSaveData>.data.highscore;
 
             currentScore = 0;
             multiplier = 1;
@@ -48,8 +49,8 @@ namespace EclipseStudios.Orbital
             if (currentScore >= highScore)
             {
                 highScore = currentScore;
-                SaveDataManager.data.highscore = highScore;
-                SaveDataManager.SaveData();
+                SaveDataManager<OrbitalSaveData>.data.highscore = highScore;
+                SaveDataManager<OrbitalSaveData>.SaveData();
             }
         }
     }

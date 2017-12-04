@@ -60,8 +60,6 @@ namespace FallingSloth
         /// <returns>An object from the pool.  Note that the object with not be active.</returns>
         public T GetObject()
         {
-            objects.RemoveAll(obj => obj == null);
-
             for (int i = 0; i < objects.Count; i++)
             {
                 if (!objects[i].gameObject.activeSelf)
@@ -85,24 +83,14 @@ namespace FallingSloth
         {
             List<T> activeObjects = new List<T>();
 
-            for (int i = 0; i < objects.Count; i++)
-            {
-                if (objects[i].gameObject.activeSelf)
-                {
-                    activeObjects.Add(objects[i]);
-                }
-            }
+            objects.ForEach(obj => { if (obj.gameObject.activeSelf) { activeObjects.Add(obj); } });
 
             return activeObjects.ToArray();
         }
 
         public void DestroyPool()
         {
-            for (int i = objects.Count - 1; i >= 0; i--)
-            {
-                GameObject.Destroy(objects[i].gameObject);
-                objects.RemoveAt(i);
-            }
+            objects.ForEach(obj => GameObject.Destroy(obj.gameObject));
         }
     }
 }

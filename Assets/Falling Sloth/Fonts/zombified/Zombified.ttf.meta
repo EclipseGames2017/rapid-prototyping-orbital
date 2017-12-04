@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 4e08987cb60d1f4498f9caa09e843d4a
+timeCreated: 1511788341
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Zombified
+  fontNames:
+  - Zombified
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

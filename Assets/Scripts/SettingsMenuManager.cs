@@ -1,4 +1,5 @@
-﻿using FallingSloth.Audio;
+﻿using FallingSloth;
+using FallingSloth.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace EclipseStudios.Orbital
         void Start()
         {
             //ChangeGlobalVolume(SaveDataManager.data.volume);
-            volumeSlider.value = SaveDataManager.data.volume;
+            volumeSlider.value = SaveDataManager<OrbitalSaveData>.data.volume;
         }
 
         public void ChangeGlobalVolume(float volume)
@@ -22,8 +23,22 @@ namespace EclipseStudios.Orbital
 
             AudioManager.Instance.ChangeGlobalVolume(volume);
 
-            SaveDataManager.data.volume = volume;
-            SaveDataManager.SaveData();
+            SaveDataManager<OrbitalSaveData>.data.volume = volume;
+            SaveDataManager<OrbitalSaveData>.SaveData();
+        }
+
+        public void ChangeGameColour(float hue)
+        {
+            Color colour = Color.HSVToRGB(hue, 0.73f, 1f);
+
+            foreach (GlowColourLoader obj in GlowColourLoader.activeInstances)
+                obj.UpdateColour(colour);
+
+            foreach (ImageColourLoader obj in ImageColourLoader.activeInstances)
+                obj.UpdateColour(colour);
+
+            SaveDataManager<OrbitalSaveData>.data.colour = colour;
+            SaveDataManager<OrbitalSaveData>.SaveData();
         }
     }
 }

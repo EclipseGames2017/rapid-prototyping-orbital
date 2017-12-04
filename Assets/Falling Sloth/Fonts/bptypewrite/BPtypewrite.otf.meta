@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: ee129b5f4bc8cbc4197f91dbde205edc
+timeCreated: 1512146657
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: BPtypewrite
+  fontNames:
+  - BPtypewrite
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: eb5d104f50e057246ac759b7e171629e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -248,10 +248,12 @@
     <Compile Include="Assets\Scripts\GlowColourLoader.cs" />
     <Compile Include="Assets\Scripts\ImageColourLoader.cs" />
     <Compile Include="Assets\Scripts\Launcher.cs" />
+    <Compile Include="Assets\Scripts\LightColourLoader.cs" />
     <Compile Include="Assets\Scripts\OrbitalSaveData.cs" />
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\SettingsMenuManager.cs" />
     <Compile Include="Assets\Scripts\SideBorder.cs" />
+    <Compile Include="Assets\Scripts\SpriteColourLoader.cs" />
     <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\Scripts\VectorExtensions.cs" />
   </ItemGroup>

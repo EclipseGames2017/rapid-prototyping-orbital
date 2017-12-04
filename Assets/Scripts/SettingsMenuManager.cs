@@ -31,11 +31,21 @@ namespace EclipseStudios.Orbital
         {
             Color colour = Color.HSVToRGB(hue, 0.73f, 1f);
 
-            foreach (GlowColourLoader obj in GlowColourLoader.activeInstances)
-                obj.UpdateColour(colour);
+            if (GlowColourLoader.activeInstances != null)
+                foreach (GlowColourLoader obj in GlowColourLoader.activeInstances)
+                    obj.UpdateColour(colour);
 
-            foreach (ImageColourLoader obj in ImageColourLoader.activeInstances)
-                obj.UpdateColour(colour);
+            if (ImageColourLoader.activeInstances != null)
+                foreach (ImageColourLoader obj in ImageColourLoader.activeInstances)
+                    obj.UpdateColour(colour);
+
+            if (SpriteColourLoader.activeInstances != null)
+                foreach (SpriteColourLoader obj in SpriteColourLoader.activeInstances)
+                    obj.UpdateColour(colour);
+
+            if (LightColourLoader.activeInstances != null)
+                foreach (LightColourLoader obj in LightColourLoader.activeInstances)
+                    obj.UpdateColour(colour);
 
             SaveDataManager<OrbitalSaveData>.data.colour = colour;
             SaveDataManager<OrbitalSaveData>.SaveData();

@@ -18,12 +18,16 @@ namespace EclipseStudios.Orbital
         [HideInInspector]
         new public Rigidbody2D rigidbody2D;
 
-        [HideInInspector]
-        new public Light light;
+        new Light light;
+        SpriteRenderer outline;
+
+        public float colourLerpSpeed = 1f;
 
         void Start()
         {
             rigidbody2D = GetComponent<Rigidbody2D>();
+            light = GetComponent<Light>();
+            outline = transform.Find("Outline").GetComponent<SpriteRenderer>();
 
             if (deathEffectPool == null)
             {
@@ -31,12 +35,57 @@ namespace EclipseStudios.Orbital
             }
         }
 
+        void OnEnable()
+        {
+            if (light != null)
+                light.color = SaveDataManager<OrbitalSaveData>.data.colour;
+            if (outline != null)
+                outline.color = SaveDataManager<OrbitalSaveData>.data.colour;
+        }
+
         void Update()
         {
             if (requiredOrbits <= 0f)
                 Destroy();
-            targetText.text = requiredOrbits.ToString("F1");
 
+            targetText.text = requiredOrbits.ToString("F1");
+        }
+
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (gameObject.activeSelf)
+            {
+                switch (collision.tag)
+                {
+                    case "Ball":
+                        StartCoroutine(LerpToWhite());
+                        break;
+                }
+            }
+        }
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (gameObject.activeSelf)
+            {
+                switch (collision.gameObject.tag)
+                {
+                    case "Ball":
+                        StartCoroutine(LerpFromWhite());
+                        break;
+                }
+            }
+        }
+        void OnTriggerExit2D(Collider2D collision)
+        {
+            if (gameObject.activeSelf)
+            {
+                switch (collision.tag)
+                {
+                    case "Ball":
+                        StartCoroutine(LerpFromWhite());
+                        break;
+                }
+            }
         }
 
         void Destroy()
@@ -48,6 +97,29 @@ namespace EclipseStudios.Orbital
             gameObject.SetActive(false);
             newOrbitValue += Random.Range(1, 3);
             requiredOrbits = newOrbitValue;
+        }
+
+        IEnumerator LerpToWhite()
+        {
+            Color startColour = SaveDataManager<OrbitalSaveData>.data.colour;
+            for (float i = 0f; i <= 1f; i += Time.deltaTime * colourLerpSpeed)
+            {
+                Color c = Color.Lerp(startColour, Color.white, i);
+                light.color = c;
+                outline.color = c;
+                yield return null;
+            }
+        }
+        IEnumerator LerpFromWhite()
+        {
+            Color targetColour = SaveDataManager<OrbitalSaveData>.data.colour;
+            for (float i = 0f; i <= 1f; i += Time.deltaTime * colourLerpSpeed)
+            {
+                Color c = Color.Lerp(Color.white, targetColour, i);
+                light.color = c;
+                outline.color = c;
+                yield return null;
+            }
         }
     }
 }

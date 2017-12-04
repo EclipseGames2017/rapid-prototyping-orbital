@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.UI;
 
 namespace EclipseStudios.Orbital
 {
@@ -84,6 +85,11 @@ namespace EclipseStudios.Orbital
 
         public bool hasContinued = false;
 
+        [HideInInspector]
+        public bool isPaused = false;
+        public Button pauseButton;
+        public Animator pauseMenu;
+
         protected override void Awake()
         {
             base.Awake();
@@ -100,28 +106,7 @@ namespace EclipseStudios.Orbital
             gameState = GameStates.SpawnNew;
             SpawnNewStuff();
         }
-
-        void OnDestroy()
-        {
-            Debug.LogWarning("GameManager destroyed!");
-            /*
-            targetPool.DestroyPool();
-            targetPool = null;
-
-            ballPool.DestroyPool();
-            ballPool = null;
-
-            powerupPool.DestroyPool();
-            powerupPool = null;
-
-            Target.deathEffectPool.DestroyPool();
-            Target.deathEffectPool = null;
-
-            Ball.deathEffectPool.DestroyPool();
-            Ball.deathEffectPool = null;
-            */
-        }
-
+        
         public static IEnumerator FireParticles(Vector2 direction, float magnitude)
         {
             Instance.turnCount++;
@@ -287,6 +272,14 @@ namespace EclipseStudios.Orbital
             objectsInLevel.ForEach(obj => { if (obj.transform.position.y <= -2f) { obj.SendMessage("Destroy"); } });
 
             gameState = GameStates.FireBalls;
+        }
+
+        public void PauseOrResume()
+        {
+            isPaused = !isPaused;
+            pauseButton.gameObject.SetActive(!isPaused);
+            pauseMenu.SetTrigger(isPaused ? "Open" : "Close");
+            Time.timeScale = (isPaused) ? 0f : 1f;
         }
     }
 }

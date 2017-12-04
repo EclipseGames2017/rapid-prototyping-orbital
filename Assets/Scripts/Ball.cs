@@ -105,6 +105,7 @@ namespace EclipseStudios.Orbital
         void OnDisable()
         {
             trailRenderer.enabled = false;
+            trailRenderer.Clear();
         }
 
         // once the player earns any score, the text will be updated to show the initials of each text

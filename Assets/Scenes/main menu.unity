@@ -471,6 +471,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 945576318}
+  - {fileID: 1873055463}
   - {fileID: 1982751816}
   - {fileID: 1110347963}
   m_Father: {fileID: 1232617568}
@@ -699,7 +700,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: alpha-0.5.6
+  m_Text: alpha-0.5.8
 --- !u!222 &683706444
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1731,7 +1732,7 @@ RectTransform:
   m_Children:
   - {fileID: 874904596}
   m_Father: {fileID: 587398914}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -2012,7 +2013,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1575423370}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.8125
+  m_Size: 0.68
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2362,8 +2363,6 @@ GameObject:
   - component: {fileID: 1377001514}
   - component: {fileID: 1377001518}
   - component: {fileID: 1377001517}
-  - component: {fileID: 1377001516}
-  - component: {fileID: 1377001515}
   m_Layer: 5
   m_Name: HowToText
   m_TagString: Untagged
@@ -2387,33 +2386,8 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 620, y: 800}
+  m_SizeDelta: {x: 600, y: 1000}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1377001515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1377001513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a311725ea608f654ea9414f4b9834c4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1377001516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1377001513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 0, b: 1, a: 1}
-  m_EffectDistance: {x: 1, y: 1}
-  m_UseGraphicAlpha: 1
 --- !u!114 &1377001517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2426,7 +2400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2434,7 +2408,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 930fc3a8438bf73439b06ba49bfdb624, type: 3}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 48
     m_FontStyle: 0
     m_BestFit: 0
@@ -2446,9 +2420,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Drag anywhere on the screen to choose the direction and force of your shot.  Release
-    to fire.  Try to get you ball close to the targets to take down their power and
-    destroy them, but dont crash into them or they'll destroy you!
+  m_Text: 'Drag anywhere on the screen to choose the direction and force of your shot,
+    then release to fire.
+
+
+    Try to get you ball close to the targets to take down their power and destroy
+    them, but dont crash into them or they''ll destroy you!
+
+
+    Collect power-ups to increase your ball''s power level in order to take down targets
+    quicker!'
 --- !u!222 &1377001518
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2766,7 +2747,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 800}
+  m_SizeDelta: {x: 0, y: 1000}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1534709447
 GameObject:
@@ -3486,6 +3467,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a311725ea608f654ea9414f4b9834c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1873055462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1873055463}
+  - component: {fileID: 1873055465}
+  - component: {fileID: 1873055464}
+  m_Layer: 5
+  m_Name: HowToScrollBorder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1873055463
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873055462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 587398914}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -110}
+  m_SizeDelta: {x: 660, y: 690}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1873055464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873055462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1873055465
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873055462}
 --- !u!1 &1982751815
 GameObject:
   m_ObjectHideFlags: 0
@@ -3498,7 +3547,7 @@ GameObject:
   - component: {fileID: 1982751818}
   - component: {fileID: 1982751817}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: HowToScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3517,12 +3566,12 @@ RectTransform:
   - {fileID: 843151452}
   - {fileID: 1215738146}
   m_Father: {fileID: 587398914}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -120}
-  m_SizeDelta: {x: 650, y: 650}
+  m_AnchoredPosition: {x: 0, y: -110}
+  m_SizeDelta: {x: 650, y: 680}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1982751817
 MonoBehaviour:
@@ -3536,7 +3585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

@@ -14,33 +14,28 @@ namespace EclipseStudios.Orbital
         /// </summary>
         public BorderSides side;
 
+        public float thickness = 2f;
+
         void Awake()
         {
-            // Get the main camera.
             Camera cam = Camera.main;
-
-            // Used to determine if the position should be positive or negative.
-            float sign = (side == BorderSides.Left || side == BorderSides.Bottom) ? -1f : 1f;
-
-            // Used to offset the borders outwards.
-            float offset = .4f;
-
-            // Set the position and scale based on which side it is.
             switch (side)
             {
                 case BorderSides.Top:
+                    transform.position = new Vector2(0f, cam.orthographicSize + (thickness / 2f));
+                    transform.localScale = new Vector3(cam.orthographicSize * cam.aspect * 2.5f, thickness, 1f);
+                    break;
                 case BorderSides.Bottom:
-                    transform.position = new Vector3(0f, (cam.orthographicSize + offset) * sign, 0f);
-                    transform.localScale = new Vector3(cam.orthographicSize * cam.aspect * 5f,
-                                                        transform.localScale.y,
-                                                        1f);
+                    transform.position = new Vector2(0f, -cam.orthographicSize - (thickness / 2f));
+                    transform.localScale = new Vector3(cam.orthographicSize * cam.aspect * 2.5f, thickness, 1f);
                     break;
                 case BorderSides.Left:
+                    transform.position = new Vector2((-cam.orthographicSize * cam.aspect) - (thickness / 2f), 0f);
+                    transform.localScale = new Vector3(thickness, cam.orthographicSize * 2.5f, 1f);
+                    break;
                 case BorderSides.Right:
-                    transform.position = new Vector3(((cam.orthographicSize * cam.aspect) + offset) * sign, 0f, 0f);
-                    transform.localScale = new Vector3(transform.localScale.x,
-                                                        cam.orthographicSize * 5f,
-                                                        1f);
+                    transform.position = new Vector2((cam.orthographicSize * cam.aspect) + (thickness / 2f), 0f);
+                    transform.localScale = new Vector3(thickness, cam.orthographicSize * 2.5f, 1f);
                     break;
             }
         }

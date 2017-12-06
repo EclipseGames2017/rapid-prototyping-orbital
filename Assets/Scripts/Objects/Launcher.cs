@@ -14,7 +14,7 @@ namespace EclipseStudios.Orbital
         /// </summary>
         SpriteRenderer mainRenderer;
 
-        public LineRenderer trajectoryLine;
+        TrajectoryLine trajectoryLine;
 
         /// <summary>
         /// The direction the balls will be fired in.
@@ -50,6 +50,8 @@ namespace EclipseStudios.Orbital
         {
             // Get the renderers for the launcher itself.
             mainRenderer = GetComponent<SpriteRenderer>();
+
+            trajectoryLine = GetComponent<TrajectoryLine>();
         }
 
         void Update()
@@ -149,7 +151,8 @@ namespace EclipseStudios.Orbital
             if (Mathf.Abs(angle) <= maxAngle)
             {
                 trajectoryLine.enabled = true;
-                trajectoryLine.transform.rotation = Quaternion.Euler(0, 0, angle);
+                trajectoryLine.UpdatePoints(shotMagnitude);
+                transform.rotation = Quaternion.Euler(0, 0, angle);
             }
             else
                 trajectoryLine.enabled = false;

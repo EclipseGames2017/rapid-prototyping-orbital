@@ -185,8 +185,8 @@ namespace EclipseStudios.Orbital
         {
             if (collider.gameObject.tag == "Target")
             {
-                collider.GetComponent<Target>().requiredOrbits -= ballPower * Time.deltaTime;
-                scoremanager.currentScore += scoremanager.multiplier * Time.deltaTime;
+                collider.GetComponent<Target>().requiredOrbits -= ballPower * Time.deltaTime * 10;
+                scoremanager.currentScore += scoremanager.multiplier * Time.deltaTime * 2;
             }
         }
         void OnTriggerExit2D(Collider2D collider)

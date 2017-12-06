@@ -34,11 +34,6 @@ namespace EclipseStudios.Orbital
         public float maxMagnitude = 2f;
 
         /// <summary>
-        /// A multiplier for the force that is applied to the ball.
-        /// </summary>
-        public float forceMultiplier = 10f;
-
-        /// <summary>
         /// The maximum angle the ball can be fired at.  This is the angle between Vector2.up and the direction vector.
         /// </summary>
         public float maxAngle = 85f;
@@ -144,10 +139,12 @@ namespace EclipseStudios.Orbital
         void SetDirectionAndAngle(Vector2 start, Vector2 end)
         {
             direction = (start - end);
-            shotMagnitude = direction.magnitude;
+
+            shotMagnitude = Mathf.Clamp(direction.magnitude, 0f, 8f).RemapRange(0f, 8f, minMagnitude, maxMagnitude);
+
             direction = direction.normalized;
             angle = Vector2.SignedAngle(Vector2.up, direction);
-
+            
             if (Mathf.Abs(angle) <= maxAngle)
             {
                 trajectoryLine.enabled = true;
@@ -161,7 +158,7 @@ namespace EclipseStudios.Orbital
         void Fire()
         {
             if (Mathf.Abs(angle) <= maxAngle)
-                StartCoroutine(GameManager.FireParticles(direction, Mathf.Clamp(shotMagnitude * forceMultiplier, minMagnitude, maxMagnitude)));
+                StartCoroutine(GameManager.FireParticles(direction, Mathf.Clamp(shotMagnitude, minMagnitude, maxMagnitude)));
             fingerID = -1;
             touchStartPosition = -Vector2.one;
         }

@@ -2459,10 +2459,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f76fe674c6178145acca9be096338a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minMagnitude: 0.2
-  maxMagnitude: 100
-  forceMultiplier: 25
-  maxAngle: 85
+  minMagnitude: 15
+  maxMagnitude: 60
+  maxAngle: 87.5
 --- !u!212 &1453896065
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2550,7 +2549,7 @@ MonoBehaviour:
     type: 2}
   dotCount: 5
   minSpacing: 0.25
-  maxSpacing: 1
+  maxSpacing: 1.25
 --- !u!1 &1567121879
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,22 +28,31 @@ namespace EclipseStudios.Orbital
 
         void OnEnable()
         {
-            points = new List<Vector2>();
-            for (int i = 0; i < dotCount; i++)
-
-            
             if (pointPool == null)
                 pointPool = new GameObjectPool(pointPrefab, dotCount, false);
+
+            points = new List<Vector2>();
+            for (int i = 0; i < dotCount; i++)
+                points.Add(Vector2.zero);
+
+            Debug.Log("Trajectory line enabled!");
+            for (int i = 0; i < dotCount; i++)
+            {
+                GameObject temp = pointPool.GetObject();
+                temp.SetActive(true);
+                temp.transform.parent = transform;
+            }
         }
 
         public void UpdatePoints(float shotPower)
         {
+            float spacing = shotPower.RemapRange(launcher.minMagnitude, launcher.maxMagnitude, minSpacing, maxSpacing);
             float x = 0.0f;
             float y = 1.0f;
-            float spacing = shotPower.RemapRange(launcher.minMagnitude, launcher.maxMagnitude, minSpacing, maxSpacing);
-            for (int i = 0; i < dotCount; i++)
+            foreach (GameObject temp in pointPool.GetActiveObjects())
             {
-                
+                temp.transform.localPosition = new Vector2(x, y);
+                y += spacing;
             }
         }
 

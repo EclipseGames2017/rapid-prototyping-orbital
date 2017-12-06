@@ -45,10 +45,10 @@ namespace EclipseStudios.Orbital
 
         void Update()
         {
-            if (requiredOrbits <= 0.03f)
+            if (requiredOrbits <= 0.0f)
                 Destroy();
 
-            targetText.text = requiredOrbits.ToString("F0");
+            targetText.text = Mathf.Ceil(requiredOrbits).ToString("F0");
         }
 
         void OnTriggerEnter2D(Collider2D collision)
@@ -96,7 +96,7 @@ namespace EclipseStudios.Orbital
             temp.transform.position = transform.position;
             temp.gameObject.SetActive(true);
             gameObject.SetActive(false);
-            newOrbitValue += Random.value < 0.5 ? 10 : 30;
+            newOrbitValue += Random.value < 0.5 ? 10 : 20;
             requiredOrbits = newOrbitValue;
         }
 

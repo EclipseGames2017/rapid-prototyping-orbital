@@ -260,8 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0eda9c39b4ed44a80a3a05f6506743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredOrbits: 1
-  newOrbitValue: 1
+  requiredOrbits: 10
+  newOrbitValue: 10
   deathEffectPrefab: {fileID: 114356366852947622, guid: 56cc4f31c583f2f46a1565aa03b93300,
     type: 2}
   targetText: {fileID: 102340445577724674}

@@ -9,7 +9,7 @@ namespace EclipseStudios.Orbital
     public class Target : MonoBehaviour
     {
         public float requiredOrbits = 10;
-        public float newOrbitValue = 1;
+        public float newOrbitValue = 10;
 
         public DeathEffect deathEffectPrefab;
         public static Pool<DeathEffect> deathEffectPool;
@@ -45,10 +45,10 @@ namespace EclipseStudios.Orbital
 
         void Update()
         {
-            if (requiredOrbits <= 0f)
+            if (requiredOrbits <= 0.03f)
                 Destroy();
 
-            targetText.text = requiredOrbits.ToString("F1");
+            targetText.text = requiredOrbits.ToString("F0");
         }
 
         void OnTriggerEnter2D(Collider2D collision)
@@ -88,6 +88,7 @@ namespace EclipseStudios.Orbital
             }
         }
 
+        // Destroys target and will increase between a range
         void Destroy()
         {
             AudioManager.PlaySound("target_destroy");
@@ -95,7 +96,7 @@ namespace EclipseStudios.Orbital
             temp.transform.position = transform.position;
             temp.gameObject.SetActive(true);
             gameObject.SetActive(false);
-            newOrbitValue += Random.Range(1, 3);
+            newOrbitValue += Random.value < 0.5 ? 10 : 30;
             requiredOrbits = newOrbitValue;
         }
 

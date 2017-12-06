@@ -223,12 +223,14 @@ MonoBehaviour:
   rigidbody2D: {fileID: 0}
   ballPower: 1
   PowerIncrease: 1
-  downForce: 0
-  maxVelocityMagnitude: 10
+  downForce: 5
+  maxVelocityMagnitude: 20
   maxGravityDistance: 2.5
   deathEffectPrefab: {fileID: 114356366852947622, guid: 56cc4f31c583f2f46a1565aa03b93300,
     type: 2}
   velocityReductionMultiplier: 0.5
+  maxBounces: 7
+  superDownForce: 50
   scoremanager: {fileID: 0}
   ballPowerText: {fileID: 0}
 --- !u!212 &212538234036681864

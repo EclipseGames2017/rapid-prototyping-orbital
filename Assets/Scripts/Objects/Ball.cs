@@ -63,6 +63,11 @@ namespace EclipseStudios.Orbital
         /// </summary>
         public float velocityReductionMultiplier = .85f;
 
+        int bounceCount = 0;
+
+        public int maxBounces = 10;
+
+        public float superDownForce = 100f;
 
         public ScoreManager scoremanager;
 
@@ -101,6 +106,7 @@ namespace EclipseStudios.Orbital
         {
             trailRenderer.enabled = true;
             isDead = false;
+            bounceCount = 0;
         }
         void OnDisable()
         {
@@ -135,7 +141,10 @@ namespace EclipseStudios.Orbital
                 v += (F * direction);
             }
 
-            v += Vector2.down * downForce;
+            if (bounceCount <= maxBounces)
+                v += Vector2.down * downForce;
+            else
+                v += Vector2.down * superDownForce;
 
             rigidbody2D.velocity = Vector2.ClampMagnitude(v, maxVelocityMagnitude);
         }
@@ -147,6 +156,7 @@ namespace EclipseStudios.Orbital
             {
                 case "wall":
                     AudioManager.PlaySound("wall_bounce");
+                    bounceCount++;
                     break;
 
                 case "LauncherPad":

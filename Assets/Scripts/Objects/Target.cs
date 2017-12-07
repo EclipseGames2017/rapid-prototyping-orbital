@@ -96,7 +96,7 @@ namespace EclipseStudios.Orbital
             temp.transform.position = transform.position;
             temp.gameObject.SetActive(true);
             gameObject.SetActive(false);
-            newOrbitValue += Random.value < 0.5 ? 10 : 20;
+            newOrbitValue += Random.value < 0.5 ? 10 : 20 < 0.9 ? 10 : 30;
             requiredOrbits = newOrbitValue;
         }
 

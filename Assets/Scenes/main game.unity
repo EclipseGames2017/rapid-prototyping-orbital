@@ -598,7 +598,7 @@ MonoBehaviour:
   g: 0.0006674
   objectMoveSpeed: 5
   maxObjectToSpawnEachTurn: 2
-  powerupSpawnChance: 0.15
+  powerupSpawnChance: 0.2
   hasContinued: 0
   isPaused: 0
   pauseButton: {fileID: 1330660928}

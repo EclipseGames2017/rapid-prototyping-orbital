@@ -100,7 +100,7 @@ namespace EclipseStudios.Orbital
 
         void Start()
         {
-            ballPowerText.text = "Ball Power: 1";
+            ballPowerText.text = "X 1";
         }
         void OnEnable()
         {
@@ -117,10 +117,10 @@ namespace EclipseStudios.Orbital
         // once the player earns any score, the text will be updated to show the initials of each text
         void Update()
         {
-            if (scoremanager.currentScore >= 0.1)
+            if (scoremanager.currentScore >= 0.1 || ballPower >= 2)
             {
-                ballPowerText.text = "BP: " + ballPower.ToString("F0");
-            }
+                ballPowerText.text = "X " + ballPower.ToString("F0");
+            }      
             
         }
         void FixedUpdate()
@@ -161,7 +161,7 @@ namespace EclipseStudios.Orbital
 
                 case "LauncherPad":
                 case "Target":
-                    scoremanager.multiplier = 1;
+                    scoremanager.multiplier = 0;
                     Destroy();
                     break;
             }

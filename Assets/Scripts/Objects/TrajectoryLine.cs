@@ -34,8 +34,7 @@ namespace EclipseStudios.Orbital
             points = new List<Vector2>();
             for (int i = 0; i < dotCount; i++)
                 points.Add(Vector2.zero);
-
-            Debug.Log("Trajectory line enabled!");
+            
             for (int i = 0; i < dotCount; i++)
             {
                 GameObject temp = pointPool.GetObject();

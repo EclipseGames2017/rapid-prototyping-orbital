@@ -226,7 +226,7 @@ MonoBehaviour:
   downForce: 0.01
   maxVelocityMagnitude: 20
   maxGravityDistance: 2.5
-  deathEffectPrefab: {fileID: 114356366852947622, guid: 56cc4f31c583f2f46a1565aa03b93300,
+  deathEffectPrefab: {fileID: 114916719828636502, guid: acf397daa5d50f747849ecc2939b75e4,
     type: 2}
   velocityReductionMultiplier: 0.5
   maxBounces: 7

@@ -93,7 +93,7 @@ namespace EclipseStudios.Orbital
         {
             AudioManager.PlaySound("target_destroy");
             DeathEffect temp = deathEffectPool.GetObject();
-            temp.transform.position = transform.position;
+            temp.transform.position = new Vector3(transform.position.x, transform.position.y, temp.transform.position.z);
             temp.gameObject.SetActive(true);
             gameObject.SetActive(false);
             newOrbitValue += Random.value < 0.5 ? 10 : 20 < 0.9 ? 10 : 30;

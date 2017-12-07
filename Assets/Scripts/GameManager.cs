@@ -208,7 +208,6 @@ namespace EclipseStudios.Orbital
                         case "Target":
                             AudioManager.PlaySound("game_over_sound");
                             gameState = GameStates.GameOver;
-                            Debug.Log("Showing continue screen...");
                             ContinueScreen.Show();
                             yield break;
                         case "Powerup":
@@ -224,8 +223,6 @@ namespace EclipseStudios.Orbital
 
         public static void PlayAgain()
         {
-            Debug.Log("Preparing for next round...");
-
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
 
@@ -269,7 +266,7 @@ namespace EclipseStudios.Orbital
             objectsInLevel.AddRange(targetPool.GetActiveObjects().Select(obj => obj.gameObject));
             objectsInLevel.AddRange(powerupPool.GetActiveObjects().Select(obj => obj.gameObject));
 
-            objectsInLevel.ForEach(obj => { if (obj.transform.position.y <= -2f) { obj.SendMessage("Destroy"); } });
+            objectsInLevel.ForEach(obj => { if (obj.transform.position.y <= -1.9f) { obj.SendMessage("Destroy"); } });
 
             gameState = GameStates.FireBalls;
         }

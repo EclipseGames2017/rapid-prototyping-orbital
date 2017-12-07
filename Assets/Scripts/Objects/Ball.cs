@@ -177,7 +177,7 @@ namespace EclipseStudios.Orbital
                     AudioManager.PlaySound("target_orbit");
                     rigidbody2D.velocity *= velocityReductionMultiplier;
                     scoremanager.multiplier++;
-                    
+                    bounceCount = 0;
                     break;
             }
             // Colliding with a powerup means the ball power will increase and will destroy the powerup
@@ -214,7 +214,7 @@ namespace EclipseStudios.Orbital
             AudioManager.PlaySound("ExplosionSound");
 
             DeathEffect temp = deathEffectPool.GetObject();
-            temp.transform.position = transform.position;
+            temp.transform.position = new Vector3(transform.position.x, transform.position.y, temp.transform.position.z);
             temp.gameObject.SetActive(true);
             gameObject.SetActive(false);
 

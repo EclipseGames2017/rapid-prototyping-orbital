@@ -11,6 +11,9 @@ namespace EclipseStudios.Orbital
 
         Outline outline;
 
+        [Range(0.0f, 1.0f)]
+        public float alpha = 1f;
+
         void Start()
         {
             outline = GetComponent<Outline>();
@@ -30,6 +33,7 @@ namespace EclipseStudios.Orbital
 
         public void UpdateColour(Color colour)
         {
+            colour.a = alpha;
             outline.effectColor = colour;
         }
     }

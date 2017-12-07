@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4199135748333476}
   - component: {fileID: 198314388975183222}
   - component: {fileID: 114356366852947622}
+  - component: {fileID: 114902951387919888}
   - component: {fileID: 199634781473874272}
   m_Layer: 0
   m_Name: TargetDeathEffect
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1897869145537826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,6 +55,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 3
+--- !u!114 &114902951387919888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1897869145537826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e77a6d8f322e8549912ca35293a3e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198314388975183222
 ParticleSystem:
   m_ObjectHideFlags: 1

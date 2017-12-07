@@ -28,11 +28,11 @@ namespace EclipseStudios.Orbital
             highScore = SaveDataManager<OrbitalSaveData>.data.highscore;
 
             currentScore = 0;
-            multiplier = 1;
+            multiplier = 0;
 
             currentScoreText.text = "Score: " + currentScore.ToString("F0");
-            multiplierText.text = "Multiplier: " + multiplier.ToString("F0");
-            highScoreText.text = "High Score: " + highScore.ToString("F0");
+            multiplierText.text = "COMBO: " + multiplier.ToString("F0");
+            highScoreText.text = "HS: " + highScore.ToString("F0");
         }
 
         // Updates each text whenever they change in game once the player gains a point
@@ -41,10 +41,19 @@ namespace EclipseStudios.Orbital
             if (currentScore >= 0.1f)
             {
                 currentScoreText.text = "S: " + currentScore.ToString("F0");
-                multiplierText.text = "M: " + multiplier.ToString("F0");
                 highScoreText.text = "HS: " + highScore.ToString("F0");
             }
 
+            // Activates multiplier text if multiplier is over 2
+            if (multiplier >= 2)
+            {
+                multiplierText.text = "COMBO X " + multiplier.ToString("F0");
+            }
+
+            if (multiplier <= 1)
+            {
+                multiplierText.text = "";
+            }
 
             if (currentScore >= highScore)
             {

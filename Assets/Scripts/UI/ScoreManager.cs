@@ -32,7 +32,7 @@ namespace EclipseStudios.Orbital
 
             currentScoreText.text = "Score: " + currentScore.ToString("F0");
             multiplierText.text = "COMBO: " + multiplier.ToString("F0");
-            highScoreText.text = "HS: " + highScore.ToString("F0");
+            highScoreText.text = "HI: " + highScore.ToString("F0");
         }
 
         // Updates each text whenever they change in game once the player gains a point

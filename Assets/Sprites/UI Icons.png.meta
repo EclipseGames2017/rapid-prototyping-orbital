@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 3e93c02e52d86604eb2297ff66369839
-timeCreated: 1513017463
+timeCreated: 1513034494
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -11,7 +11,7 @@ TextureImporter:
     21300008: UI_I_Icon
     21300010: UI_Back_Icon
     21300012: UI_Replay_Icon
-    21300014: UI Icons_7
+    21300014: UI_Ad_Icon
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -206,7 +206,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI Icons_7
+      name: UI_Ad_Icon
       rect:
         serializedVersion: 2
         x: 384

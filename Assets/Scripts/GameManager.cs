@@ -206,10 +206,14 @@ namespace EclipseStudios.Orbital
                     switch (objectsToMove[i].tag)
                     {
                         case "Target":
-                            AudioManager.PlaySound("game_over_sound");
-                            gameState = GameStates.GameOver;
-                            ContinueScreen.Show();
-                            yield break;
+                            if (objectsToMove[i].gameObject.activeSelf)
+                            {
+                                AudioManager.PlaySound("game_over_sound");
+                                gameState = GameStates.GameOver;
+                                ContinueScreen.Show();
+                                yield break;
+                            }
+                            break;
                         case "Powerup":
                             objectsToMove[i].GetComponent<BallPowerup>().Destroy();
                             break;

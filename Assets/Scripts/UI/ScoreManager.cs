@@ -41,7 +41,7 @@ namespace EclipseStudios.Orbital
             if (currentScore >= 0.1f)
             {
                 currentScoreText.text = "S: " + currentScore.ToString("F0");
-                highScoreText.text = "HS: " + highScore.ToString("F0");
+                highScoreText.text = "HI: " + highScore.ToString("F0");
             }
 
             // Activates multiplier text if multiplier is over 2

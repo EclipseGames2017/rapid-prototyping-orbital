@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4482255223367400}
   - component: {fileID: 212710097015518708}
-  - component: {fileID: 114574659811903794}
+  - component: {fileID: 114367447769103358}
   m_Layer: 10
   m_Name: Outline
   m_TagString: Untagged
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 58532431171855170}
   - component: {fileID: 114324249129244638}
   - component: {fileID: 108757227283650292}
-  - component: {fileID: 114589357081203418}
+  - component: {fileID: 114302803994153498}
   m_Layer: 10
   m_Name: Target
   m_TagString: Target
@@ -249,6 +249,19 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114302803994153498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1679227445911032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d7587f4cba34146a1faaa7a81bb2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  alphaMultiplier: 1
 --- !u!114 &114324249129244638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,7 +280,7 @@ MonoBehaviour:
   targetText: {fileID: 102340445577724674}
   rigidbody2D: {fileID: 0}
   colourLerpSpeed: 4
---- !u!114 &114574659811903794
+--- !u!114 &114367447769103358
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -275,20 +288,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1135381634767942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf920178ea4a8174083ffcdafb455d26, type: 3}
+  m_Script: {fileID: 11500000, guid: 11d7587f4cba34146a1faaa7a81bb2df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114589357081203418
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1679227445911032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 888e2066a5be673408c90b946f81b596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  type: 2
+  alphaMultiplier: 1
 --- !u!212 &212405036143028982
 SpriteRenderer:
   m_ObjectHideFlags: 1

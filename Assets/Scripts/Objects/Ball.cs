@@ -22,6 +22,7 @@ namespace EclipseStudios.Orbital
         /// The multiplier for how fast the ball takes down targets.
         /// </summary>
         public float ballPower;
+        float ballPowerLastFrame = 0;
 
         /// <summary>
         /// 
@@ -72,6 +73,7 @@ namespace EclipseStudios.Orbital
         public ScoreManager scoremanager;
 
         public Text ballPowerText;
+        ColourLoader ballPowerTextColour;
 
         bool d = false;
         bool isDead
@@ -89,6 +91,7 @@ namespace EclipseStudios.Orbital
 
             scoremanager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
             ballPowerText = GameObject.Find("BallPowerText").GetComponent<Text>();
+            ballPowerTextColour = ballPowerText.GetComponent<ColourLoader>();
 
             rigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -117,9 +120,11 @@ namespace EclipseStudios.Orbital
         // once the player earns any score, the text will be updated to show the initials of each text
         void Update()
         {
-            if (scoremanager.currentScore >= 0.1 || ballPower >= 2)
+            if (ballPower > ballPowerLastFrame)
             {
                 ballPowerText.text = "X " + ballPower.ToString("F0");
+                ballPowerTextColour.FlashWhite();
+                ballPowerLastFrame = ballPower;
             }      
             
         }

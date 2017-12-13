@@ -57,7 +57,7 @@ namespace EclipseStudios.Orbital
             }
 
             // Activates multiplier text if multiplier is over 2
-            if (multiplier >= 2 && lastFrameMultiplier < 2)
+            if (multiplier >= 2 && lastFrameMultiplier < multiplier)
             {
                 multiplierText.text = "COMBO X " + multiplier.ToString("F0");
                 multiplierTextColour.FlashWhite();
